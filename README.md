@@ -281,10 +281,6 @@ Launchly maintains an extensive suite of senior-grade architectural specificatio
 ### Architecture Decision Records (ADRs)
 - [Architecture Decision Log (docs/adr/README.md)](docs/adr/README.md) — Standardized Nygard ADRs (ADR-001 through ADR-010).
 
----
-
-## Documentation Index
-
 All architectural choices, setup guides, and project specifications are documented in the `docs/` directory:
 
 - [docs/README.md](docs/README.md) — Master documentation index and navigation hub.
