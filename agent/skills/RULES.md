@@ -9,7 +9,7 @@
 
 ---
 
-## ☕ Backend Layer-by-Layer Rules
+## Backend Layer-by-Layer Rules
 
 ### 1. Controllers
 - Only handle HTTP mapping, payload parsing, and HTTP status codes.
@@ -61,7 +61,7 @@
 
 ---
 
-## 🚀 Backend Advanced Rules & Features Conventions
+## Backend Advanced Rules & Features Conventions
 
 ### 1. Asynchronous Execution (`@Async`)
 - Use `@Async` for heavy operations, background dispatches, and third-party integrations (e.g., executing Broadcast campaigns).
@@ -109,7 +109,7 @@
 
 ---
 
-## 🎨 Backend Naming & Schema Conventions
+## Backend Naming & Schema Conventions
 
 ### Database Tables (snake_case)
 - `users`
@@ -151,7 +151,7 @@
 
 ---
 
-## ⚛️ Frontend Coding Conventions
+## Frontend Coding Conventions
 
 ### 1. File Structure
 
@@ -170,12 +170,12 @@ Do NOT create a general `src/pages/` folder for feature-specific pages.
 ### 2. API Hooks — Mandatorily via TanStack Query
 
 ```tsx
-// ❌ Forbidden — direct API request call in presentation component
+// [FORBIDDEN] — direct API request call in presentation component
 const onSubmit = async (data) => {
   const response = await loginApi(data);
 }
 
-// ✅ Correct — wrapped via query/mutation hooks
+// [CORRECT] — wrapped via query/mutation hooks
 // features/auth/hooks/useLoginMutation.ts
 export const useLoginMutation = () => {
   const login = useAuthStore((state) => state.login);
@@ -193,17 +193,17 @@ const onSubmit = (data: LoginFields) => mutate(data);
 ### 3. Type Safety — Forbidden any in API clients
 
 ```tsx
-// ❌ Forbidden
+// [FORBIDDEN]
 export const loginApi = async (credentials: any): Promise<AuthResponse>
 
-// ✅ Correct
+// [CORRECT]
 export const loginApi = async (credentials: LoginRequest): Promise<AuthResponse>
 ```
 
 ### 4. Components — Separation of Logic and UI View
 
 ```tsx
-// ❌ Forbidden — logic and UI combined in page component
+// [FORBIDDEN] — logic and UI combined in page component
 const LoginPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const onSubmit = async (data) => {
@@ -214,7 +214,7 @@ const LoginPage = () => {
   return ...;
 }
 
-// ✅ Correct — logic isolated in hook, UI component reads state
+// [CORRECT] — logic isolated in hook, UI component reads state
 // hooks/useLoginForm.ts
 export const useLoginForm = () => {
   const { mutate, isPending, error } = useLoginMutation();
@@ -249,11 +249,11 @@ const { error } = useLoginMutation();
 ### 6. Zustand vs TanStack Query State Division
 
 ```tsx
-// ✅ In Zustand — auth profiles, active settings, UI toggles
+// In Zustand — auth profiles, active settings, UI toggles
 useAuthStore — user, tokens
 useUIStore   — sidebarOpen, theme, activeBot
 
-// ✅ In TanStack Query — server state caching and sync
+// In TanStack Query — server state caching and sync
 useBots()           — list of bots
 useOrders(botId)    — orders data
 useConversations()  — active CRM threads

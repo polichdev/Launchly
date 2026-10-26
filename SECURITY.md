@@ -15,8 +15,8 @@ Launchly provides security patches and critical vulnerability mitigations for th
 
 | Release Line | Supported | Minimum Runtime | Status |
 |---|---|---|---|
-| `v1.x` (Current Main) | :white_check_mark: Supported | Java 21 LTS / Node 20+ | Active Production Support |
-| `< 1.0` (Alpha / Beta) | :x: End of Life | Java 17 | Unsupported |
+| `v1.x` (Current Main) | Yes | Java 21 LTS / Node 20+ | Active Production Support |
+| `< 1.0` (Alpha / Beta) | No | Java 17 | Unsupported |
 
 ---
 

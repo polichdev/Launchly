@@ -135,7 +135,7 @@ frontend/src/
 
 ## Module Architectural Details
 
-### 🤖 Bot Module (Flow Engine & Telegram)
+### Bot Module (Flow Engine & Telegram)
 * **Flow Engine**: Parses and executes flow graphs defined by bot owners.
   * **Execution Loop**: Walk starts at the `START` node. When executing, the engine evaluates the current node type, triggers the corresponding `NodeExecutor`, and proceeds along target edges.
   * **State Evaluation**: Evaluates conditional expressions in `CONDITION` nodes, looking up saved variables in the user's Redis session context.
@@ -154,36 +154,36 @@ frontend/src/
   * **Polling Mode** (`telegram.mode=polling`): Runs local polling threads using `TelegramBotsLongPollingApplication`.
   * **Webhook Mode** (`telegram.mode=webhook`): Configures endpoints `/api/v1/telegram/webhook/{token}` for high-performance production dispatches.
 
-### 📊 CRM Module (Conversations & Real-Time)
+### CRM Module (Conversations & Real-Time)
 * **Conversations**: Encapsulates a complete chat log between a single `BotUser` and a `Bot`. Conversations can be closed or open.
 * **Messages**: Tracks chronological messaging history. Both incoming messages (from bot users) and outgoing replies (from bot owners via CRM workspace) are saved.
 * **WebSocket STOMP Integration**: Allows owners to receive updates instantly without API polling.
   * Active owners subscribe to specific channels on the WebSocket broker.
   * Back-end triggers WebSocket pushes on DB updates via `CrmWebSocketService`.
 
-### 📢 Broadcast Module (Campaign Segmentation & Limits)
+### Broadcast Module (Campaign Segmentation & Limits)
 * **Tags**: Arbitrary labels mapped to `BotUser` profiles (many-to-many relationship) to segment audiences.
 * **BroadcastFilterService**: Matches target bot users dynamically based on tag filter groups.
 * **BroadcastScheduler & Rate Limiting**:
   * Broadcast campaigns are dispatched asynchronously in background threads.
   * **Telegram Rate Limits Protection**: Telegram enforces a strict limit of **30 messages per second** globally across a bot, and **1 message per second** to a specific user. The scheduler implements a token-bucket or thread-delay throttler to prevent `429 Too Many Requests` API failures.
 
-### 💳 Billing Module (Subscription & Payments)
+### Billing Module (Subscription & Payments)
 * **Plans & Subscriptions**: Manages system billing plans (`FREE`, `STARTUP`, `ENTERPRISE`) and active client subscriptions synchronized via Stripe payments.
 * **Stripe Webhooks**: Listens to Stripe events (`checkout.session.completed`, `customer.subscription.updated`, `customer.subscription.deleted`) to provision or teardown limits dynamically.
 * **Plan Limits Verification**: Exposes `PlanLimitService` to validate user request actions (e.g. maximum bot counts, active CRM users, campaign broadcasts access, third-party integrations, and daily AI assistant request limits) according to the user's active plan tier.
 
-### 🔌 Integrations Module (Sync, Exports & Webhooks)
+### Integrations Module (Sync, Exports & Webhooks)
 * **Google Sheets Sync**: Dynamically exchanges OAuth authorization codes and auto-refreshes tokens. Asynchronously appends order/lead row arrays using the Google Sheets REST API.
 * **Excel Export**: Generates binary spreadsheets styled with Apache POI, returning a unified `ExcelExportResult` to keep controllers decoupled from header construction.
 * **Webhook Delivery**: Dispatches POST dispatches signed with HMAC-SHA256 headers matching the owner's webhook secrets, using a retry mechanism up to 4 total attempts.
 
-### 🧠 AI Module (Groq Client & Usage limits)
+### AI Module (Groq Client & Usage limits)
 * **Groq Chat Assistant**: Facilitates completion prompts containing Launchly business assistant rules and chat history.
 * **Schema Generation**: Resolves visual node constructor graph schemas from descriptions, ensuring exactly one `START` node is declared.
 * **Daily Caching Limits**: Enforces a 20 request/day cap for the `FREE` tier, cache-storing usage counts in Redis for fast validation.
 
-### 🖼️ Media Module (Assets & Storage)
+### Media Module (Assets & Storage)
 * **Central Asset Portal**: Serves as the single access point for uploading and deleting media files (avatars, product photos).
 * **Automatic Optimizations**: Automatically resizes files to a maximum of 1200x1200px, optimizes visual quality (`q_auto`), and converts uploads to next-gen WebP format (`f_auto`).
 * **Secure Ownership Boundaries**: Restricts delete requests by checking that the targeted public ID matches the prefix pattern `launchly/{userId}/` of the authenticated user.
