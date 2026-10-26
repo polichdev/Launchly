@@ -1,4 +1,4 @@
-# Launchly — Telegram Bot Builder, Multi-Channel CRM
+﻿# Launchly — Telegram Bot Builder, Multi-Channel CRM
 
 [![Checks & Validation](https://github.com/polchduikt/launchly/actions/workflows/checks.yml/badge.svg)](https://github.com/polchduikt/launchly/actions/workflows/checks.yml)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=polchduikt_launchly&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=polchduikt_launchly)
@@ -259,17 +259,48 @@ docker compose -f docker-compose.prod.yml up -d --build
 All architectural choices, setup guides, and project specifications are documented in the `docs/` directory:
 
 - [docs/DEV_SETUP.md](docs/DEV_SETUP.md) — Step-by-step local setup checklist.
+- [docs/## Engineering & Architecture Specifications
+
+Launchly maintains an extensive suite of senior-grade architectural specifications, threat models, failure runbooks, and protocol standards:
+
+### Core Systems Specifications
+- [Repository Structure (docs/STRUCTURE.md)](docs/STRUCTURE.md) — Monorepo design, package-by-feature layout, and architectural boundary rules.
+- [Threat Model & Security Architecture (docs/THREAT_MODEL.md)](docs/THREAT_MODEL.md) — STRIDE security model, Turnstile verification, and trust boundaries.
+- [Concurrency & Resource Architecture (docs/CONCURRENCY.md)](docs/CONCURRENCY.md) — Java 21 Project Loom virtual threads, carrier thread pinning prevention, and connection pools.
+- [Failure Modes & Recovery Runbook (docs/FAILURES_AND_RECOVERY.md)](docs/FAILURES_AND_RECOVERY.md) — Multi-provider AI fallback ladder, Telegram 429 backoff, and Outbox DLQ re-drive.
+- [Privacy, GDPR & Compliance (docs/PRIVACY.md)](docs/PRIVACY.md) — GDPR compliance, automated PII log scrubbing, retention policies, and data erasure.
+
+### Formal Protocols & Subsystems
+- [Bot Graph JSON AST Specification (docs/specs/BOT_GRAPH_SCHEMA.md)](docs/specs/BOT_GRAPH_SCHEMA.md) — Node definitions, edge transitions, and variable execution context.
+- [STOMP WebSocket Live Chat Protocol (docs/specs/WEBSOCKET_PROTOCOL.md)](docs/specs/WEBSOCKET_PROTOCOL.md) — Full-duplex STOMP framing, topic registry, and heartbeat recovery.
+- [Bot Flow Execution Engine (docs/modules/BOT_ENGINE.md)](docs/modules/BOT_ENGINE.md) — Polymorphic node executors, webhook dispatching, and call stack manager.
+- [Omnichannel CRM & Live Inbox (docs/modules/CRM_INBOX.md)](docs/modules/CRM_INBOX.md) — Two-way chat streaming, operator takeover protocol, and lead pipelines.
+- [Multi-Provider AI Fallback Router (docs/modules/AI_ROUTER.md)](docs/modules/AI_ROUTER.md) — Dynamic failover across Groq, Gemini, OpenRouter, and Cerebras with circuit breakers.
+- [Broadcast Campaigns Subsystem (docs/modules/BROADCAST_CAMPAIGNS.md)](docs/modules/BROADCAST_CAMPAIGNS.md) — High-volume messaging, Telegram 30 msg/s rate throttling, and JDBC batch staging.
+
+### Architecture Decision Records (ADRs)
+- [Architecture Decision Log (docs/adr/README.md)](docs/adr/README.md) — Standardized Nygard ADRs (ADR-001 through ADR-010).
+
+---
+
+## Documentation Index
+
+All architectural choices, setup guides, and project specifications are documented in the `docs/` directory:
+
+- [docs/README.md](docs/README.md) — Master documentation index and navigation hub.
+- [docs/DEV_SETUP.md](docs/DEV_SETUP.md) — Step-by-step local setup checklist.
 - [docs/API_KEYS_GUIDE.md](docs/API_KEYS_GUIDE.md) — External services & API keys configuration guide.
 - [docs/FEATURES.md](docs/FEATURES.md) — Full feature specification & platform capabilities.
 - [docs/DATA_MODEL.md](docs/DATA_MODEL.md) — Database ER diagram & table specifications.
 - [docs/backend/API_SURFACE.md](docs/backend/API_SURFACE.md) — Complete REST & WebSocket API specification.
 - [docs/backend/ARCHITECTURE.md](docs/backend/ARCHITECTURE.md) — Backend architecture & request lifecycles.
 - [docs/frontend/ARCHITECTURE.md](docs/frontend/ARCHITECTURE.md) — Frontend architecture & state design.
-- [docs/backend/decisions/README.md](docs/backend/decisions/README.md) — Backend Architecture Decision Records (ADRs).
-- [docs/frontend/decisions/README.md](docs/frontend/decisions/README.md) — Frontend Architecture Decision Records (ADRs).
 - [docs/deployment/DEPLOYMENT.md](docs/deployment/DEPLOYMENT.md) — Production Docker & CI/CD deployment guide.
 - [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) — Repository commit conventions & PR guidelines.
 - [docs/TECH_DEBT.md](docs/TECH_DEBT.md) — Technical debt & refactoring plans.
+- [CHANGELOG.md](CHANGELOG.md) — Versioned changelog following Keep a Changelog.
+- [SECURITY.md](SECURITY.md) — Security policy and vulnerability disclosure SLA.
+- [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) — Contributor Covenant v2.1.
 
 ---
 
